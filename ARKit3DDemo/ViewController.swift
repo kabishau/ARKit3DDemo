@@ -17,7 +17,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         configureLighting()
-        addPaperPlane()
+        //addPaperPlane()
+        addCar()
         
         
         
@@ -43,6 +44,20 @@ class ViewController: UIViewController {
     
     }
     
+    func addCar(x: Float = 0, y: Float = 0, z: Float = -0.5) {
+        guard let carScene = SCNScene(named: "car.dae") else { return }
+        let carNode = SCNNode()
+        let carSceneChildNodes = carScene.rootNode.childNodes
+        
+        for childNode in carSceneChildNodes {
+            carNode.addChildNode(childNode)
+        }
+        
+        carNode.position = SCNVector3(x, y, z)
+        carNode.scale = SCNVector3(0.5, 0.5, 0.5)
+        sceneView.scene.rootNode.addChildNode(carNode)
+        
+    }
     func configureLighting() {
         sceneView.autoenablesDefaultLighting = true
         sceneView.automaticallyUpdatesLighting = true
